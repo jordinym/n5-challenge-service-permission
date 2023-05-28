@@ -43,6 +43,7 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     services.AddServicesInAssembly(configuration);
+    services.AddApplicationServices();
     services.AddInfrastructureServices(configuration);
  
 }

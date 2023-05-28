@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
+using N5Permission.Domain.AggregatesModel.PermissionAggregate;
 using N5Permission.Infrastructure.Persistance;
+using N5Permission.Infrastructure.Persistance.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,8 @@ namespace N5Permission.Infrastructure.CrossCutting
         {
             services.AddDbContextConfig(configuration);
 
+            services.AddPermissionServices(configuration);
+
             return services;
         }
 
@@ -44,5 +48,12 @@ namespace N5Permission.Infrastructure.CrossCutting
 
             return services;
         }
-    }
+
+        public static IServiceCollection AddPermissionServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddTransient<IPermissionRepository, PermissionRepository>();
+
+            return services;
+        }
+        }
 }

@@ -1,6 +1,8 @@
-﻿namespace N5Permission.Domain.Common
+﻿using N5Permission.Domain.SeedWork;
+
+namespace N5Permission.Domain.Common
 {
-    public class BaseEntity
+    public class BaseEntity: EntityEvent
     {
         public string CreationUser { get; set; }
         public DateTime CreationDate { get; set; }

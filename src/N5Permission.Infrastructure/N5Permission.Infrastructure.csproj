@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\N5Permission.Domain\N5Permission.Domain.csproj" />
+    <ProjectReference Include="..\N5Permission.Application\N5Permission.Application.csproj" />
   </ItemGroup>
 
 </Project>

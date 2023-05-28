@@ -1,10 +1,11 @@
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
+using N5Permission.Application.Permission.Queries.GetPermissions;
+using N5Permission.Application.Permission.Queries.GetPermissionWithPagination;
 
 namespace N5Permission.Api.Controllers
-{
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+{ 
+    public class WeatherForecastController : ApiControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
@@ -18,16 +19,13 @@ namespace N5Permission.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+         
+
+        [HttpGet(Name = "GetPermission")]
+        public async Task<ActionResult<List<GetPermissionsQueryResponse>>> GetPermission()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var result = await Mediator.Send(new GetPermissionsQuery());
+            return result;
         }
     }
 }
