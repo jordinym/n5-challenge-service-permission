@@ -2,6 +2,9 @@ using Microsoft.Extensions.Configuration;
 using N5Permission.Api.Installers.Helpers;
 using N5Permission.Infrastructure.CrossCutting;
 using N5Permission.Infrastructure.Persistance;
+using Serilog.Sinks.Elasticsearch;
+using Serilog;
+using System.Reflection;
 
 IConfiguration configuration;
 
@@ -16,6 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 ConfigureServices(builder.Services);
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
@@ -47,3 +52,4 @@ void ConfigureServices(IServiceCollection services)
     services.AddInfrastructureServices(configuration);
  
 }
+ 

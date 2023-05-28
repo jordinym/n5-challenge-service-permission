@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  local-db-sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: docker-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "N5Company2023*"
+      ACCEPT_EULA: "Y"
+    networks:
+      - n5company-network
+  local-elasticsearch:
+    container_name: docker-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    ports:
+      - 9450:9200
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    networks:
+      - n5company-network
+  local-kibana:
+    container_name: docker-kibana
+    image: docker.elastic.co/kibana/kibana:7.17.10
+    ports:
+      - 5601:5601
+    depends_on:
+      - local-elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://host.docker.internal:9450
+    networks:
+      - n5company-network
+
+networks:
+  n5company-network:
+    name: n5company-api-network
+    driver: bridge
+volumes:
+  elasticsearch-data:

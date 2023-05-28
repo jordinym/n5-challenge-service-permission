@@ -4,7 +4,7 @@
     {
         public string Secret { get; set; }
         public N5PermissionSettings ServicePermissionSettings { get; set; }
-        public ConnectionString ConnectionStrings { get; set; } 
+        public ConnectionString ConnectionStrings { get; set; }
 
         public class ConnectionString
         {
@@ -21,8 +21,8 @@
         {
             public int HoursOfExpires { get; set; }
             public int MinutesOfExpires { get; set; }
-            public string ApiUrl { get; set; } 
+            public string ApiUrl { get; set; }
         }
-         
+
     }
 }

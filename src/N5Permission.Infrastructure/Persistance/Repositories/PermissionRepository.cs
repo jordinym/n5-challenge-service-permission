@@ -34,5 +34,10 @@ namespace N5Permission.Infrastructure.Persistance.Repositories
                 .Update(permission)
                 .Entity;
         }
+
+        public Task<PermissionEntity> GetPermissionById(int id)
+        {
+            return _context.Permissions.FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

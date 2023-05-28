@@ -6,6 +6,7 @@ namespace N5Permission.Domain.AggregatesModel.PermissionAggregate
     {
         PermissionEntity Add(PermissionEntity permission);
         PermissionEntity Update(PermissionEntity permission);
+        Task<PermissionEntity> GetPermissionById(int id);
         Task<List<PermissionEntity>> GetPermissions();
     }
 }

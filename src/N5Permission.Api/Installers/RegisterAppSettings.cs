@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using N5Permission.Api.Contracts;
+using N5Permission.Application.Common;
 using N5Permission.Infrastructure.CrossCutting;
 
 namespace N5Permission.Api.Installers
