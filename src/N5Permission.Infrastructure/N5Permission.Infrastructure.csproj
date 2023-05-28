@@ -9,14 +9,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\N5Permission.Domain\N5Permission.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CrossCutting\" />
   </ItemGroup>
 
 </Project>
