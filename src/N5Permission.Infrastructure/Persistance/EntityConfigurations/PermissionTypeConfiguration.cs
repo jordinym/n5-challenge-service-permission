@@ -23,6 +23,8 @@ namespace N5Permission.Infrastructure.EntityConfigurations
                 .HasColumnType("varchar(120)")
                 .IsRequired();
 
+            builder.Ignore(c => c.RegistrationDate);
+
             base.Configure(builder);
         }
     }

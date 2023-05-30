@@ -9,7 +9,9 @@ namespace N5Permission.Application.Permission.Queries.GetPermissions
         public int Id { get; set; }
         public string EmployeeForename { get; set; }
         public string EmployeeSurname { get; set; }
-        public int PermisionTypeId { get; set; }
+        public int PermissionTypeId { get; set; }
+        public string PermissionType { get; set; }
+        public string RegistrationDate { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -17,7 +19,9 @@ namespace N5Permission.Application.Permission.Queries.GetPermissions
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.EmployeeForename, opt => opt.MapFrom(s => s.EmployeeForename))
                 .ForMember(d => d.EmployeeSurname, opt => opt.MapFrom(s => s.EmployeeSurname))
-                .ForMember(d => d.PermisionTypeId, opt => opt.MapFrom(s => s.PermisionTypeId));
+                .ForMember(d => d.RegistrationDate, opt => opt.MapFrom(s => s.RegistrationDate))
+                .ForMember(d => d.PermissionTypeId, opt => opt.MapFrom(s => s.PermissionType.Id))
+                .ForMember(d => d.PermissionType, opt => opt.MapFrom(s => s.PermissionType.Description));
         }
     }
 }

@@ -5,6 +5,7 @@ using N5Permission.Domain.Common;
 using N5Permission.Domain.SeedWork;
 using N5Permission.Infrastructure.CrossCutting;
 using N5Permission.Infrastructure.EntityConfigurations;
+using System.Reflection.Emit;
 
 namespace N5Permission.Infrastructure.Persistance
 {
@@ -26,6 +27,13 @@ namespace N5Permission.Infrastructure.Persistance
         {
             builder.ApplyConfiguration(new PermissionConfiguration());
             builder.ApplyConfiguration(new PermissionTypeConfiguration());
+
+            #region Function Configurations
+
+            builder.HasDbFunction(typeof(N5PermissionContext).GetMethod(nameof(ConvertDateTimeToString), new[] { typeof(DateTime), typeof(string) }) ?? throw new InvalidOperationException())
+            .HasName("to_char");
+
+            #endregion
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -68,5 +76,10 @@ namespace N5Permission.Infrastructure.Persistance
                 }
             }
         }
+
+        #region Functions
+        public string ConvertDateTimeToString(DateTime dateTime, string format)
+            => throw new NotSupportedException(); 
+        #endregion
     }
 }

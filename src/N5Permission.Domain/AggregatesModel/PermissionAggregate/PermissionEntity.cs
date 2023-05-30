@@ -9,6 +9,7 @@ namespace N5Permission.Domain.AggregatesModel.PermissionAggregate
         public string EmployeeForename { get; set; }
         public string EmployeeSurname { get; set; }
         public int PermisionTypeId { get; set; }
+        public string RegistrationDate { get; set; }
         public virtual PermissionTypeEntity PermissionType { get; set; }
 
     }

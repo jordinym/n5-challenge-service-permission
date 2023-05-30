@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using N5Permission.Application.Permission.Commands.CreatePermission;
+using N5Permission.Application.Permission.Commands.CreatePermissionType;
 using N5Permission.Application.Permission.Commands.UpdatePermission;
+using N5Permission.Application.Permission.Commands.UpdatePermissionType;
 using N5Permission.Application.Permission.Queries.GetPermissions;
+using N5Permission.Application.Permission.Queries.GetPermissionTypes;
 using N5Permission.Application.Permission.Queries.GetPermissionWithPagination;
 
 namespace N5Permission.Api.Controllers
@@ -14,7 +17,7 @@ namespace N5Permission.Api.Controllers
         {
             _logger = logger;
         }
-
+         
         [HttpGet]
         public async Task<ActionResult<List<GetPermissionsQueryResponse>>> GetPermissions()
         {
@@ -34,6 +37,28 @@ namespace N5Permission.Api.Controllers
         public async Task<ActionResult<int>> UpdatePermission(UpdatePermissionCommand updatePermissionCommand)
         {
             var result = await Mediator.Send(updatePermissionCommand);
+            return result;
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<List<GetPermissionTypesQueryResponse>>> GetPermissionTypes()
+        {
+            _logger.LogInformation("This is a wow message to test the logs");
+            var result = await Mediator.Send(new GetPermissionTypesQuery());
+            return result;
+        }
+         
+        [HttpPost("types")]
+        public async Task<ActionResult<int>> SavePermissionType(CreatePermissionTypeCommand createPermissionTypeCommand)
+        {
+            var result = await Mediator.Send(createPermissionTypeCommand);
+            return result;
+        }
+
+        [HttpPut("types")]
+        public async Task<ActionResult<int>> UpdatePermissionType(UpdatePermissionTypeCommand updatePermissionTypeCommand)
+        {
+            var result = await Mediator.Send(updatePermissionTypeCommand);
             return result;
         }
     }

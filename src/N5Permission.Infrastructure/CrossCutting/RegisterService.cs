@@ -46,6 +46,7 @@ namespace N5Permission.Infrastructure.CrossCutting
         public static IServiceCollection AddPermissionServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IPermissionRepository, PermissionRepository>();
+            services.AddTransient<IPermissionTypeRepository, PermissionTypeRepository>();
 
             services.AddElasticsearch(configuration);
 

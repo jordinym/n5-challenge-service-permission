@@ -34,6 +34,8 @@ namespace N5Permission.Infrastructure.EntityConfigurations
                 .HasColumnType("varchar(100)")
                 .IsRequired();
 
+            builder.Ignore(c => c.RegistrationDate);
+
             builder.HasOne(d => d.PermissionType).WithMany(p => p.Permissions).HasForeignKey(d => d.PermisionTypeId);
             base.Configure(builder);
         }
