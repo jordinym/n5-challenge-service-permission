@@ -4,6 +4,7 @@ using N5Permission.Infrastructure.Persistance;
 using Serilog;
 using N5Permission.Api.Filters;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Hosting;
 
 IConfiguration configuration;
 
@@ -23,14 +24,14 @@ ConfigureServices(builder.Services);
 builder.Host.UseSerilog();
 
 var app = builder.Build();
-
+  
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+   
 }
-
+app.UseSwagger();
+app.UseSwaggerUI();
 // Initialise database
 using (var scope = app.Services.CreateScope())
 {

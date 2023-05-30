@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5Permission.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5Permission.Domain", "src\N5Permission.Domain\N5Permission.Domain.csproj", "{7C43BB4D-8EC8-4D92-BD30-EEB85D2A3634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5Permission.Infrastructure", "src\N5Permission.Infrastructure\N5Permission.Infrastructure.csproj", "{EC75DD7A-D91D-41A3-A946-CC204CB399AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5Permission.Infrastructure", "src\N5Permission.Infrastructure\N5Permission.Infrastructure.csproj", "{EC75DD7A-D91D-41A3-A946-CC204CB399AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

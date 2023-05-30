@@ -1,39 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using N5Permission.Application.Common;
 using N5Permission.Domain.AggregatesModel.PermissionAggregate;
-using N5Permission.Domain.SeedWork; 
+using N5Permission.Infrastructure.Persistance.Repositories.Base;
 
 namespace N5Permission.Infrastructure.Persistance.Repositories
 {
-    public class PermissionTypeRepository : IPermissionTypeRepository
+    public class PermissionTypeRepository : BaseRepository<PermissionTypeEntity>, IPermissionTypeRepository
     {
-        private readonly N5PermissionContext _context; 
+        private readonly N5PermissionContext _context;  
 
-        public IUnitOfWork UnitOfWork => _context;
-
-        public PermissionTypeRepository(N5PermissionContext context)
+        public PermissionTypeRepository(N5PermissionContext context) : base(context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }  
-
-        public PermissionTypeEntity Add(PermissionTypeEntity permissionType)
-        {
-            return _context.PermissionTypes
-               .Add(permissionType)
-               .Entity;
-        }
-
-        public PermissionTypeEntity Update(PermissionTypeEntity permissionType)
-        {
-            return _context.PermissionTypes
-                .Update(permissionType)
-                .Entity;
-        }
-
-        public Task<PermissionTypeEntity> GetPermissionById(int id)
-        {
-            return _context.PermissionTypes.FirstOrDefaultAsync(p => p.Id == id);
-        }
 
         public Task<List<PermissionTypeEntity>> GetPermissionTypes()
         {

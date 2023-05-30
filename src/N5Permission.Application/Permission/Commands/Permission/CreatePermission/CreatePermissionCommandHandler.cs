@@ -2,22 +2,25 @@
 using MediatR;
 using N5Permission.Application.Permission.Dto;
 using N5Permission.Domain.AggregatesModel.PermissionAggregate;
+using N5Permission.Domain.SeedWork;
 using Nest;
 
 namespace N5Permission.Application.Permission.Commands.CreatePermission
 {
     public class CreatePermissionCommandHandler : IRequestHandler<CreatePermissionCommand, int>
-    {
-        private readonly IPermissionRepository _permissionRepository;
+    { 
         private readonly IElasticClient _elasticClient;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper; 
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreatePermissionCommandHandler(IPermissionRepository permissionRepository, IElasticClient elasticClient, IMapper mapper)
-        { 
-            _permissionRepository = permissionRepository;
+        public CreatePermissionCommandHandler(IUnitOfWork unitOfWork, IElasticClient elasticClient, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
             _elasticClient = elasticClient;
             _mapper = mapper;
         }
+        private IPermissionRepository _permissionRepository => _unitOfWork.Repository<IPermissionRepository>();
+
         public async Task<int> Handle(CreatePermissionCommand request, CancellationToken cancellationToken)
         {
             var permissionEntity = new PermissionEntity()
@@ -26,10 +29,9 @@ namespace N5Permission.Application.Permission.Commands.CreatePermission
                 EmployeeSurname = request.EmployeeSurname,
                 PermisionTypeId= (int)request.PermisionTypeId
             };
-            _permissionRepository.Add(permissionEntity);
-           
-
-            await _permissionRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+              _permissionRepository.Insert(permissionEntity);
+            
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             await SaveChangeLog(permissionEntity);
              
             return permissionEntity.Id;

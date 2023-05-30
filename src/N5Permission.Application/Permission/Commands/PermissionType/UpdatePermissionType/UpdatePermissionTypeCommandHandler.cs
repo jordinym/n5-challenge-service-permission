@@ -1,35 +1,39 @@
 ﻿using AutoMapper;
 using MediatR;
+using N5Permission.Application.Common.Exceptions;
 using N5Permission.Application.Permission.Dto;
 using N5Permission.Domain.AggregatesModel.PermissionAggregate;
+using N5Permission.Domain.SeedWork;
 using Nest;
 
 namespace N5Permission.Application.Permission.Commands.UpdatePermissionType
 {
     public class UpdatePermissionTypeCommandHandler : IRequestHandler<UpdatePermissionTypeCommand, int>
-    {
-        private readonly IPermissionTypeRepository _permissionRepository;
+    { 
         private readonly IElasticClient _elasticClient;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdatePermissionTypeCommandHandler(IPermissionTypeRepository permissionRepository, IElasticClient elasticClient, IMapper mapper)
+        public UpdatePermissionTypeCommandHandler(IUnitOfWork unitOfWork, IElasticClient elasticClient, IMapper mapper)
         {
-            _permissionRepository = permissionRepository;
+            _unitOfWork = unitOfWork;
             _elasticClient = elasticClient;
             _mapper = mapper;
         }
+        private IPermissionTypeRepository _permissionRepository => _unitOfWork.Repository<IPermissionTypeRepository>();
+
         public async Task<int> Handle(UpdatePermissionTypeCommand request, CancellationToken cancellationToken)
-        {
-            var permissionTypeEntity = await _permissionRepository.GetPermissionById((int)request.Id);
+        { 
+            var permissionTypeEntity = await _permissionRepository.FirstOrDefaultAsync(r => r.Id == (int)request.Id);
             if (permissionTypeEntity == null)
             {
-                throw new Exception("permission type not exists");
+                throw new NotFoundException(nameof(PermissionTypeEntity), (int)request.Id);
             }
 
             permissionTypeEntity.Description = request.Description; 
 
             _permissionRepository.Update(permissionTypeEntity);
-            await _permissionRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             //await SaveChangeLog(permissionTypeEntity);
 
             return permissionTypeEntity.Id;
