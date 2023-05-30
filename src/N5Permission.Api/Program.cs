@@ -1,10 +1,9 @@
-using Microsoft.Extensions.Configuration;
 using N5Permission.Api.Installers.Helpers;
 using N5Permission.Infrastructure.CrossCutting;
 using N5Permission.Infrastructure.Persistance;
-using Serilog.Sinks.Elasticsearch;
 using Serilog;
-using System.Reflection;
+using N5Permission.Api.Filters;
+using FluentValidation.AspNetCore;
 
 IConfiguration configuration;
 
@@ -12,8 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 configuration = builder.Configuration;
 // Add services to the container.
-
-builder.Services.AddControllers();
+ 
+builder.Services.AddControllers(opt => opt.Filters.Add<ApiExceptionFilterAttribute>())
+            .AddFluentValidation();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

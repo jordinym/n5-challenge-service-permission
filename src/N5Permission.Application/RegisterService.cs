@@ -1,5 +1,7 @@
-﻿using FluentValidation; 
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using N5Permission.Application.Common.Behaviors;
 using System.Reflection;
 
 namespace N5Permission.Infrastructure.CrossCutting
@@ -14,6 +16,10 @@ namespace N5Permission.Infrastructure.CrossCutting
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); 
             });
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
 
             return services;
         }

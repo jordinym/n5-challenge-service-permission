@@ -20,4 +20,8 @@
     <ProjectReference Include="..\N5Permission.Infrastructure\N5Permission.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Filters\Handlers\" />
+  </ItemGroup>
+
 </Project>

@@ -1,11 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Confluent.Kafka;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using N5Permission.Application.Common.Services;
 using N5Permission.Domain.AggregatesModel.PermissionAggregate;
 using N5Permission.Infrastructure.CrossCutting.Extensions;
 using N5Permission.Infrastructure.Persistance;
 using N5Permission.Infrastructure.Persistance.Repositories;
+using N5Permission.Infrastructure.Services;
 
 namespace N5Permission.Infrastructure.CrossCutting
 {
@@ -49,7 +53,11 @@ namespace N5Permission.Infrastructure.CrossCutting
             services.AddTransient<IPermissionTypeRepository, PermissionTypeRepository>();
 
             services.AddElasticsearch(configuration);
+             
+            services.Configure<ProducerConfig>(configuration.GetSection(nameof(ProducerConfig)));
 
+            services.AddTransient<IKafkaService, KafkaService>();
+             
             return services;
         }
     }
