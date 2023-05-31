@@ -12,7 +12,7 @@ Pending include description of service
 1. Pending include details of steps for to use api
 2. View message in topic
  - Get Container id of kafka
- https://github.com/jordiny/n5-challenge-app-permission/assets/13501855/ad140d99-a7a5-42e9-a7d3-50d032e94581
+ ![Challenge](https://github.com/jordiny/n5-challenge-app-permission/assets/13501855/ad140d99-a7a5-42e9-a7d3-50d032e94581)
 
   - Execute commands
   - docker exec -it container-id sh
