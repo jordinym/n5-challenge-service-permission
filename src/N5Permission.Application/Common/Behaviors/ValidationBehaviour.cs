@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
-using MediatR; 
+using MediatR;
 
+using ValidationException = N5Permission.Application.Common.Exceptions.ValidationException;
 namespace N5Permission.Application.Common.Behaviors
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

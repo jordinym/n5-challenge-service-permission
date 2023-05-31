@@ -1,0 +1,10 @@
+﻿global using AutoMapper;
+global using Moq;
+global using N5Permission.Application.Permission.Queries.GetPermissionTypes;
+global using N5Permission.Domain.AggregatesModel.PermissionAggregate;
+global using N5Permission.Application.Permission.Queries.GetPermissions;
+global using N5Permission.Application.Permission.Queries.GetPermissionWithPagination;
+global using Xunit;
+global using N5Permission.Domain.SeedWork;
+global using N5Permission.UnitTests.Mock;
+global using N5Permission.Application.Common.Exceptions;
