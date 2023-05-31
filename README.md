@@ -21,11 +21,30 @@ Pending include description of service
   - kafka-console-consumer.sh --topic n5_permission_event_topic --from-beginning --bootstrap-server localhost:9092 (view messages)
 
 ## Features
+- [x] Clean Architecture
+- [x] CQRS with MediatR Library
+- [x] Entity Framework Core - Code First
+- [x] Repository Pattern
+- [x] Unit of Work
+- [x] MediatR Pipeline Logging & Validation
+- [x] Serilog
+- [x] Swagger UI
+- [x] Custom Exception Handling Middlewares
+- [x] Fluent Validation
+- [x] Automapper
+- [x] Kibana/ElasticSearch (Logs/Log Change)
+- [x] Kafka Event bus
+- [x] Unit Testing With xUnit
+- [x] Integration Testing With NUnit
+
+## Unit Testing And Integration Testing
+
+
+![Challenge](https://github.com/jordiny/n5-challenge-service-permission/assets/13501855/c0267e02-d697-4401-a130-15d84af394ef)
 
 ## Test API
 
 * ## Permission API 
-
 
 ![Challenge](https://github.com/jordiny/n5-challenge-app-permission/assets/13501855/81d6188b-0c2d-4abc-89f4-3b24696c8d20)
 

@@ -79,6 +79,16 @@ services:
       - "3550:80"
     networks:
       - n5company-network
+  local-db-sql-test:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: docker-sqlserver-test
+    ports:
+      - "5443:1433"
+    environment:
+      SA_PASSWORD: "N5Company2023*"
+      ACCEPT_EULA: "Y"
+    networks:
+      - n5company-network
     
 networks:
   n5company-network:

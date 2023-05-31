@@ -30,7 +30,7 @@ namespace N5Permission.Application.Permission.Commands.CreatePermission
                 PermisionTypeId= (int)request.PermisionTypeId
             };
               _permissionRepository.Insert(permissionEntity);
-            
+
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             await SaveChangeLog(permissionEntity);
              
