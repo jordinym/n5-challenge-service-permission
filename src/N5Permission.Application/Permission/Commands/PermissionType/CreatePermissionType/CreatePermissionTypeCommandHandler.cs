@@ -29,10 +29,10 @@ namespace N5Permission.Application.Permission.Commands.CreatePermissionType
                 Description= request.Description
             };
             _permissionRepository.Insert(permissionTypeEntity);
-            
+
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             //await SaveChangeLog(permissionTypeEntity);
-             
+
             return permissionTypeEntity.Id;
         }
 
